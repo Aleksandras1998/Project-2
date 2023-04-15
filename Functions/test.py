@@ -13,6 +13,7 @@ def dataLoad(filename, Nx, Ny, Nz):
     with open(filename, mode='rb') as file:
         #Read data from the binary file
         filein=file.read()
+        #print(filein)
         
         #Checking if the number of elements in the file 
         #matches the num_elements
@@ -43,6 +44,6 @@ if result is not None:
 
 #How to achieve the same result 8388608 by multiplying 3 different numbers:
 # (2^10)*(2^7)*(2^6)=2^(10+7+6)=2^23 (sum of powers has to give always 23)
-    
+ #2^6*2^6*2^11=2^23=   
 
         
