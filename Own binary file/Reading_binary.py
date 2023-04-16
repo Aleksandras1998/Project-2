@@ -6,7 +6,7 @@ filename='small 3D array.bin'
 with open(filename, "rb") as file:
     binary_data = file.read()
 array_from_file = np.frombuffer(binary_data, dtype=data.dtype).reshape(data.shape)
-print(np.round(array_from_file,2))
+print(np.round(array_from_file,4))
 # for i in range(array_from_file.shape[0]):
 #     print(array_from_file[i,:,:])
 

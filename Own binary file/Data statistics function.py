@@ -22,29 +22,24 @@ def dataStatistics(data, statistic, Yref, Zref, DeltaX):
         return np.round(np.sum((array_from_file-mean)**2,axis=0)/Nx,2)
         
     if statistic == "Cross-correlation":
-        sum_start=0
-        sum_end=Nx-DeltaX
-        cross_cor=0.0
+        lower_bound=0
+        upper_bound=Nx-DeltaX
+
         
         #Creating an empty 2D array to store the multiplied elements
-        multiply_array=np.zeros((Ny,Nz))
+        multiply_array=np.zeros((Nx-DeltaX,Ny,Nz))
         
-        for x in range (sum_start,sum_end):
+        for x in range (lower_bound,upper_bound):
             for y in range (Ny):
                 for z in range (Nz):
-                    multiply_array[y,z]=array_from_file[x,y,z]*array_from_file[x+DeltaX,Yref,Zref]
-                    sumation=np.sum(multiply_array,axis=0)
-            print()
-            print(np.round(multiply_array,2))
-            print('summmation')
-            print(sumation)
-                                                                 
-                     
-            # Sum multiplied elements together
-            # Cr_cor=np.sum(multiply_array)/(Nx-DeltaX)
-            # cross_cor+=Cr_cor
-            cross_cor=sumation/(Nx-DeltaX)
-        return cross_cor
+                    multiply_array[x,y,z]=array_from_file[x,y,z]*array_from_file[x+DeltaX,Yref,Zref]
+        # print(np.round(multiply_array,4))
+        summation=np.sum(multiply_array,axis=0)
+        # print()
+        # print(np.round(summation,4))
+        
+
+        return np.around(summation/(Nx-DeltaX),4)
         
 
     
