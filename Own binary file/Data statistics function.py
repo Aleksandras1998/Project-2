@@ -41,8 +41,9 @@ def dataStatistics(data, statistic, Yref, Zref, DeltaX):
                                                                  
                      
             # Sum multiplied elements together
-            Cr_cor=np.sum(multiply_array)/(Nx-DeltaX)
-            cross_cor+=Cr_cor
+            # Cr_cor=np.sum(multiply_array)/(Nx-DeltaX)
+            # cross_cor+=Cr_cor
+            cross_cor=sumation/(Nx-DeltaX)
         return cross_cor
         
 
