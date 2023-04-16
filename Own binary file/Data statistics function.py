@@ -24,14 +24,25 @@ def dataStatistics(data, statistic, Yref, Zref, DeltaX):
     if statistic == "Cross-correlation":
         sum_start=0
         sum_end=Nx-DeltaX
-        for x in range (sum_start,sum_end+1):
-            for y in range (0,Ny):
-                for z in range (0,Nz):
+        cross_cor=0.0
+        
+        #Creating an empty 2D array to store the multiplied elements
+        multiply_array=np.zeros((Ny,Nz))
+        
+        for x in range (sum_start,sum_end):
+            sum_arr=0.0
+            for y in range (Ny):
+                for z in range (Nz):
                     array=array_from_file[x,y,z]*array_from_file[x+DeltaX,Yref,Zref]
                     print(array)
-                    sum_array=array[sum_start:sum_end+1]
-                    Cr_cor=np.sum(sum_array)/(Nx-DeltaX)
-        return Cr_cor
+                    sum_arr+=array
+                    #print(sum_arr)
+                                                                 
+                     
+                    # sum_array=array[sum_start:sum_end+1]
+            Cr_cor=sum_arr/(Nx-DeltaX)
+            cross_cor+=Cr_cor
+        return cross_cor
         
 
     
