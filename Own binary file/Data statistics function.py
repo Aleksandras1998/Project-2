@@ -30,17 +30,18 @@ def dataStatistics(data, statistic, Yref, Zref, DeltaX):
         multiply_array=np.zeros((Ny,Nz))
         
         for x in range (sum_start,sum_end):
-            sum_arr=0.0
             for y in range (Ny):
                 for z in range (Nz):
-                    array=array_from_file[x,y,z]*array_from_file[x+DeltaX,Yref,Zref]
-                    print(array)
-                    sum_arr+=array
-                    #print(sum_arr)
+                    multiply_array[y,z]=array_from_file[x,y,z]*array_from_file[x+DeltaX,Yref,Zref]
+                    sumation=np.sum(multiply_array,axis=0)
+            print()
+            print(np.round(multiply_array,2))
+            print('summmation')
+            print(sumation)
                                                                  
                      
-                    # sum_array=array[sum_start:sum_end+1]
-            Cr_cor=sum_arr/(Nx-DeltaX)
+            # Sum multiplied elements together
+            Cr_cor=np.sum(multiply_array)/(Nx-DeltaX)
             cross_cor+=Cr_cor
         return cross_cor
         
