@@ -6,31 +6,37 @@ def dataLoad(filename, Nx, Ny, Nz):
      
     num_elements=Nx*Ny*Nz
     
-    with open(filename, mode='rb') as file:
-        #Read data from the binary file
-        filein=file.read()
-        #print(filein)
-        
-        #Checking if the number of elements in the file 
-        #matches the num_elements
-        
-        num_file=len(filein)//4 # Each float is 4 bytes
-        if num_file != num_elements:
-            print(f'Error: Number of elements in the {filename} file\n'+
-                  f'({num_file}) does not match the expected number ({num_elements}))')
-            return None
-        else:
-            print('╔' + '═'*49 + '╗\n'+
-                 f'║ Data loaded successfully from {filename} ║\n'+
-                  '╚' + '═'*49 + '╝')
-        
-        #Unpack the binary data into a flat array of floats
-        values=struct.unpack(f'{num_elements}f',filein)
-        
-        #Reshape the array into a 3D array
-        data=np.reshape(values, (Nz,Ny, Nx)) #Nz come to the place of Nx (becomes as Nx)
-     
-        return data
+    #Read data from the binary file
+    #print(filein)
+    values = np.fromfile("turbine_32x32x8192.bin", dtype=np.float32)
+    
+    #Checking if the number of elements in the file 
+    #matches the num_elements
+    
+    num_file=len(values) 
+    if num_file != num_elements:
+        print(f'Error: Number of elements in the {filename} file\n'+
+                f'({num_file}) does not match the expected number ({num_elements}))')
+        return None
+    else:
+        print('╔' + '═'*49 + '╗\n'+
+                f'║ Data loaded successfully from {filename} ║\n'+
+                '╚' + '═'*49 + '╝')
+    
+    #Unpack the binary data into a flat array of floats
+    #Reshape the array into a 3D array
+    #data=np.reshape(values, (Nx,Ny, Nz)) #Nz come to the place of Nx (becomes as Nx)
+    
+    #data = np.zeros((Nz, Ny, Nx))
+    #for x in range(Nx):
+    #    for y in range(Ny):
+    #        for z in range(Nz):
+    #            data[z, y, x] = (values[(x * Ny * Nz) + (y * Nz) + z])
+    data = np.reshape(values, (Nx, Ny, Nz))
+    data = np.transpose(data, (2, 1, 0))
+
+    print(data.shape)
+    return data
 
 
 def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):

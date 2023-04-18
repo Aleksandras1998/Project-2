@@ -27,7 +27,7 @@ def dataLoader():
                       '┃Or type "q" to return to main menu┃'
                       '┗' + '━'*41 + '┛\n>>')
                 
-                Nx=input('Nx:').strip()
+                Nx=input('Nx: ').strip()
                 if Nx.lower()=='q':
                     return None
                 elif Nx.isdigit():
@@ -64,7 +64,7 @@ def dataLoader():
                 # File not loaded successfully, so continue the while loop
                 continue
             
-        except:
+        except IOError as e:
             print(f'Error loading data from {filename}. Please try again')
         
     return matrix_3d
