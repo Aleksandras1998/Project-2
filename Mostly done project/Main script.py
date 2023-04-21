@@ -106,8 +106,7 @@ if __name__=='__main__':
                       '|' + ' '*3 + 'Please load data before continuing' + ' '*3 + '|\n'+
                       '+' + '-'*40 + '+') #if not, print
             else:
-                plot_data = dataPlot()
-    
+                pass
         if user_input == 4:
             print()
             print('The program has been terminated')
