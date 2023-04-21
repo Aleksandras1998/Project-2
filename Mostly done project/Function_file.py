@@ -3,7 +3,7 @@ import struct
 #from Data_loader import Nx, Ny, Nz
 
 def dataLoad(filename, Nx, Ny, Nz):
-     
+    
     num_elements=Nx*Ny*Nz
     
     with open(filename, mode='rb') as file:
@@ -28,9 +28,11 @@ def dataLoad(filename, Nx, Ny, Nz):
         values=struct.unpack(f'{num_elements}f',filein)
         
         #Reshape the array into a 3D array
+        
         data=np.reshape(values, (Nz,Ny, Nx)) #Nz come to the place of Nx (becomes as Nx)
-     
-        return data
+        final_data=np.transpose(data,(Nx,Ny,Nz))
+        
+        return final_data
 
 
 def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
@@ -48,7 +50,7 @@ def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
     if statistic == "Variance":
         mean=np.round(np.mean(array_from_file,axis=0),2)
         #print(mean)
-        #print (np.round(np.var(array_from_file,axis=0),2)) - works the same way as ↓
+        print (np.round(np.var(array_from_file,axis=0),2))
         #return np.round(np.sum((array_from_file-mean)**2,axis=0)/Nx,2)
         return np.round(np.sum((array_from_file-mean)**2,axis=0)/array_from_file.shape[0],2)#Here can be problem with indexing
         

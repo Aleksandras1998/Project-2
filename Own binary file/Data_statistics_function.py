@@ -33,10 +33,10 @@ def dataStatistics(data, statistic, Yref, Zref, DeltaX):
             for y in range (Ny):
                 for z in range (Nz):
                     multiply_array[x,y,z]=array_from_file[x,y,z]*array_from_file[x+DeltaX,Yref,Zref]
-        # print(np.round(multiply_array,4))
+        print(np.round(multiply_array,4))
         summation=np.sum(multiply_array,axis=0)
-        # print()
-        # print(np.round(summation,4))
+        print()
+        print(np.round(summation,4))
         
 
         return np.around(summation/(Nx-DeltaX),4)
