@@ -4,11 +4,11 @@ from Function_file import dataLoad
 def dataLoader():
     while True:
         try:
-            user_input = input('┏' + '━'*41 + '┓\n'+
-                             '┃You are in the Load data menu┃\n'+
-                             '┃Please insert file name and upload file ┃\n'+
-                             '┃Or type "q" to return to main menu┃\n'+
-                             '┗' + '━'*41 + '┛\n>>')
+            user_input = input('┏' + '━'*39 + '┓\n'+
+                             '┃'+' '*4+'You are now in Load data menu'+' '*5+'┃\n'+
+                             '┃Please insert file name and upload file┃\n'+
+                             '┃'+' '*2+'Or type "q" to return to main menu'+' '*3+'┃\n'+
+                             '┗' + '━'*39 + '┛\n>>')
             if user_input.lower()=='q':
                 return None
             elif not user_input.endswith('.bin'):
@@ -22,10 +22,10 @@ def dataLoader():
             filename=user_input
             
             while True:
-                print('┏' + '━'*41 + '┓\n'+
-                      '┃ Enter the dimensions of the data (Nx, Ny, Nz): ┃\n'+
-                      '┃Or type "q" to return to main menu┃\n'+
-                      '┗' + '━'*41 + '┛\n>>')
+                print('┏' + '━'*45 + '┓\n'+
+                      '┃Enter the dimensions of the 3D array (Nx, Ny, Nz)┃\n'+
+                      '┃' + ' '*5 +'Or type "q" to return to main menu'+ ' '*6 + '┃\n'+
+                      '┗' + '━'*45 + '┛\n')
                 
                 Nx=input('Nx:').strip()
                 if Nx.lower()=='q':

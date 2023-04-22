@@ -87,7 +87,9 @@ if __name__=='__main__':
                         #statistics_calculated=True
                     elif user_input_statistic == 3:
                         while True:
-                            print('Please enter Yref, Zref, DeltaX values')
+                            print('┏' + '━'*38 + '┓\n'+
+                                  '┃Please enter Yref, Zref, DeltaX values┃\n'+
+                                  '┗' + '━'*38 + '┛\n')
                             Yref=input('Yref: ').strip()
                             Zref=input('Zref: ').strip()
                             DeltaX=input('DeltaX: ').strip()
@@ -103,14 +105,20 @@ if __name__=='__main__':
                                 #statistics_calculated=True
                                 break
                             else:
-                                print('Please enter integer values for Yref, Zref, and DeltaX.')
+                                print('┏' + '━'*40 + '┓\n'+
+                                      '┃Please enter integer values for Yref, Zref, and DeltaX.┃\n'+
+                                      '┗' + '━'*40 + '┛\n')
                                 continue
 
                     elif user_input_statistic == 4:
                         break
     
                     else:
-                        print("Please select an existing statistical function")
+                        print('+'+'-'*46+'+\n'+
+                              '|' + ' '*19 + 'WARNING!' + ' '*19 + '|\n'+
+                              '|Please select an existing statistical function|\n'+
+                              '+' + '-'*46 + '+')
+                              
 # =============================================================================
 # #[3]rd selection - Generating plot
 # =============================================================================
@@ -161,8 +169,11 @@ if __name__=='__main__':
                     elif user_input_plot ==4:
                         break
                     else:
-                        print("Please select an existing plot function")
-                        
+                        print('+'+'-'*39+'+\n'+
+                              '|' + ' '*16 + 'WARNING!' + ' '*15 + '|\n'+
+                              '|Please select an existing plot function|\n'+
+                              '+' + '-'*39 + '+')
+                       
 
         if user_input == 4:
             print()

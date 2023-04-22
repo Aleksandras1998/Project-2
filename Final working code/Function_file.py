@@ -23,6 +23,7 @@ def dataLoad(filename, Nx, Ny, Nz):
         else:
             print('╔' + '═'*49 + '╗\n'+
                  f'║ Data loaded successfully from {filename} ║\n'+
+                 f'║ The number of elements in {filename} is: {num_elements_in_file} ║\n'+
                   '╚' + '═'*49 + '╝')
             
         #Creating an empty 3D array with the specified dimensions
@@ -59,7 +60,7 @@ def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
 # =============================================================================
     
     if statistic == "Mean":
-        return np.round(np.mean(data, axis=0),2)       
+        return np.round(np.mean(data, axis=0),3)       
 # =============================================================================
 #         Alternative option for mean calculation (gives same result):
 # =============================================================================
@@ -72,7 +73,7 @@ def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
 
        
     if statistic == "Variance":
-        return np.var(data,axis=0)       
+        return np.round(np.var(data,axis=0),3)       
 # =============================================================================
 #         Alternative option for variance calculation (gives same result):
 # =============================================================================
