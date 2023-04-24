@@ -186,7 +186,7 @@ if __name__=='__main__':
                 
                 while True:
                     user_input_plot=int(input('┏' + '━'*40 + '┓\n'+
-                                              '┃Please select which plot to generate┃\n'+
+                                              '┃' + ' '*2 + 'Please select which plot to generate' + ' '*2 + '┃\n'+
                                               '┗' + '━'*40 + '┛\n'+
                                               "[1] Mean\n" +
                                               "[2] Variance\n" +
