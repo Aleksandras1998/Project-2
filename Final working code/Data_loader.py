@@ -27,7 +27,7 @@ def dataLoader():
                       '┃' + ' '*5 +'Or type "q" to return to main menu'+ ' '*6 + '┃\n'+
                       '┗' + '━'*45 + '┛\n')
                 
-                Nx=input('Nx:').strip()
+                Nx=input('Nx: ').strip()
                 if Nx.lower()=='q':
                     return None
                 elif Nx.isdigit():

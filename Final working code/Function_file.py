@@ -9,7 +9,7 @@ def dataLoad(filename, Nx, Ny, Nz):
     with open(filename, mode='rb') as file:
         
         #Read data from the binary file
-        array_1d=np.fromfile(file,dtype=np.float32)
+        array_1d=np.fromfile(file,dtype=np.single)
         
         #Checking if the number of elements in the file 
         #matches the number of elements from input
@@ -26,41 +26,40 @@ def dataLoad(filename, Nx, Ny, Nz):
                  f'║ The number of elements in {filename} is: {num_elements_in_file} ║\n'+
                   '╚' + '═'*49 + '╝')
             
-        #Creating an empty 3D array with the specified dimensions
-        array_3d=np.zeros((Nz, Ny, Nx))
         
         
         #Reshape the 1D array into the 3D array according the rules given
-        for z in range (Nz):
-            for y in range(Ny):
-                for x in range(Nx):
-                    index_1d=z+y*Nz+x*Ny*Nz
-                    array_3d[z,y,x]=array_1d[index_1d]
-        data=array_3d
-# =============================================================================
-#         Alternative (working) 3D array arrangment
-#         data=array_1d.reshape((Nx, Ny, Nz))
-#         data=np.transpose(data, (2, 1, 0)) → Used in statistics calculations
-#            
-# =============================================================================
+        #for z in range (Nz):
+           # for y in range(Ny):
+               # for x in range(Nx):
+                   # index_1d=z+y*Nz+x*Ny*Nz
+                   # array_3d[z,y,x]=array_1d[index_1d]
+        # data=array_3d
+
+        #Reshape the 1D array into the 3D array according the rules given
+        data=array_1d.reshape((Nx, Ny, Nz))
+        data=np.transpose(data, (2, 1, 0)) 
+            
+
      
         return data
 
 
 def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
     
-    #Reshaping [Nz x Ny x Ny] array to [Nx x Ny x Nz] for further stats calculations
+    #Reshaping [Nz x Ny x Nx] array to [Nx x Ny x Nz] for further stats calculations
     data=data.transpose((2,1,0))
-    array_yz=np.zeros((data.shape[1], data.shape[2]))
+    results=np.zeros((data.shape[1], data.shape[2]))
     # print(data)
     # print(array_yz)
-    
+    Nx, Ny, Nz = data.shape
+
 # =============================================================================
 #                   Creating if statements for stats calculations
 # =============================================================================
     
     if statistic == "Mean":
-        return np.round(np.mean(data, axis=0),3)       
+        results = np.round(np.mean(data, axis=0),3)       
 # =============================================================================
 #         Alternative option for mean calculation (gives same result):
 # =============================================================================
@@ -73,7 +72,8 @@ def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
 
        
     if statistic == "Variance":
-        return np.round(np.var(data,axis=0),3)       
+        results = np.round(np.var(data,axis=0),3)  
+    
 # =============================================================================
 #         Alternative option for variance calculation (gives same result):
 # =============================================================================
@@ -91,8 +91,8 @@ def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
             raise ValueError('Yref, Zref, and DeltaX must be provided for cross-correlation calculation')
         
         #Assigning variables for cross-correlation calculations
-        Nx, Ny, Nz = data.shape
-        lower_bound=0
+       
+        lower_bound=1
         upper_bound=Nx-DeltaX
         print(data.shape[0])
         print(data.shape[1])
@@ -108,7 +108,9 @@ def dataStatistics(data, statistic, Yref=None, Zref=None, DeltaX=None):
                     multiply_array[x,y,z]=data[x,y,z]*data[x+DeltaX,Yref,Zref]
         summation=np.sum(multiply_array,axis=0)      
 
-        return np.round(summation/(Nx-DeltaX),3)
+        results =  np.round(summation/(Nx-DeltaX),3)
+    assert results.shape == (Ny, Nz), (f'Error: {statistic} has invalid shape')
+    return results
 
 def dataPlot (data, statistic):
     
@@ -137,7 +139,8 @@ def dataPlot (data, statistic):
         ax.set_ylabel('Wind speed in y direction (Vy (m/s)')
         
         #Show the plot
-        plt.show()
+        plt.show(block=False)
+        
         
         return (dataPlot)
     
@@ -159,7 +162,8 @@ def dataPlot (data, statistic):
         ax.set_ylabel('Wind speed in y direction (Vy (m/s)')
         
         #Show the plot
-        plt.show()
+        plt.show(block=False)
+        
         
         return (dataPlot)
     
@@ -181,7 +185,7 @@ def dataPlot (data, statistic):
         ax.set_ylabel('Wind speed in y direction (Vy (m/s)')
         
         #Show the plot
-        plt.show()
+        plt.show(block=False)
         
         return (dataPlot)
 

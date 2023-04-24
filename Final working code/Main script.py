@@ -9,7 +9,9 @@ if __name__=='__main__':
 # =============================================================================
 #               Here we are creating User interaction Main menu
 # =============================================================================
-    
+    Nx = 0
+    Ny = 0
+    Nz = 0
     data_loaded=False
     Yref=None
     Zref=None
@@ -28,13 +30,13 @@ if __name__=='__main__':
                                  '[4] Quit.\n'+
                                  '>>'))
             if user_input >4 or user_input<1:
-                #print()
+                
                 print('+'+'-'*40+'+')
                 print('|' + ' '*16 + 'WARNING!' + ' '*16 + '|')
                 raise ValueError('|' + ' '*3 + 'Select a number from the Main menu' + ' '*3 + '|')
         except ValueError as e:
             print(e)
-            print('|' + ' '*12 + 'Please try again' + ' '*12 + '|')
+            print('|' + ' '*12 + 'Please try again by inserting a number from 1 to 4' + ' '*12 + '|')
             print('+' + '-'*40 + '+')
             
             continue
@@ -47,6 +49,9 @@ if __name__=='__main__':
                 print(f'{matrix_3d.shape[2]}')
                 print(f'{matrix_3d.shape[1]}')
                 print(f'{matrix_3d.shape[0]}')
+                Nx = matrix_3d.shape[2]
+                Ny = matrix_3d.shape[1]
+                Nz = matrix_3d.shape[0]
                 data_loaded=True
 
 # =============================================================================
@@ -86,29 +91,70 @@ if __name__=='__main__':
                         print(variance)
                         #statistics_calculated=True
                     elif user_input_statistic == 3:
-                        while True:
-                            print('┏' + '━'*38 + '┓\n'+
-                                  '┃Please enter Yref, Zref, DeltaX values┃\n'+
-                                  '┗' + '━'*38 + '┛\n')
-                            Yref=input('Yref: ').strip()
-                            Zref=input('Zref: ').strip()
-                            DeltaX=input('DeltaX: ').strip()
-                            if Yref.isdigit() and Zref.isdigit() and DeltaX.isdigit():
-                                Yref=int(Yref)
-                                Zref=int(Zref)
-                                DeltaX=int(DeltaX)
+                        
+                        print('┏' + '━'*38 + '┓\n'+
+                            '┃Please enter Yref, Zref, DeltaX values┃\n'+
+                            '┗' + '━'*38 + '┛\n')
+                        
+                        
                                 
-                                cross_cor=dataStatistics(matrix_3d, statistic[user_input_statistic - 1], Yref, Zref, DeltaX)
-                                print()
-                                print(f'The {statistic[user_input_statistic-1]} are:\n')
-                                print(cross_cor)
-                                #statistics_calculated=True
-                                break
+                        while True:
+                            Yref=input('Yref: ').strip()
+                            if Yref.isdigit():
+                                Yref=int(Yref)
+                                # Check that Yref, Zref and DeltaX are not out of bound
+                            
+                                if Yref < 1 or Yref > Ny:
+                                    print(f"Error: Yref should be within the range[1, {Ny}].")
+                                    continue
+                                else:
+                                    break
                             else:
-                                print('┏' + '━'*40 + '┓\n'+
-                                      '┃Please enter integer values for Yref, Zref, and DeltaX.┃\n'+
-                                      '┗' + '━'*40 + '┛\n')
+                                print('┏' + '━'*37 + '┓\n'+
+                                    '┃Please enter integer values for Yref.┃\n'+
+                                    '┗' + '━'*37 + '┛\n')
                                 continue
+                        while True:
+                            Zref=input('Zref: ').strip()
+                            if Zref.isdigit() :
+                                Zref=int(Zref)
+                                 # Check that Yref, Zref and DeltaX are not out of bound
+                                if Zref < 1 or Zref > Nz:
+                                    print(f"Error: Zref should be within the range[1, {Nz}].")
+                                    continue
+                                else:
+                                    break
+                            else:
+                                print('┏' + '━'*37 + '┓\n'+
+                                    '┃Please enter integer values for Zref.┃\n'+
+                                    '┗' + '━'*37 + '┛\n')
+                                continue
+                        while True:
+                            DeltaX=input('DeltaX: ').strip()
+                            if DeltaX.isdigit():
+                                DeltaX=int(DeltaX)
+                                 # Check that Yref, Zref and DeltaX are not out of bound
+                                if DeltaX < 0 or DeltaX > Nx:
+                                    print(f"Error: DeltaX should be within the range[0, {Nx}].")
+                                    continue
+                                
+                                else:
+                                    break
+                            else:
+                                print('┏' + '━'*39 + '┓\n'+
+                                    '┃Please enter integer values for DeltaX.┃\n'+
+                                    '┗' + '━'*39 + '┛\n')
+                                continue   
+                               
+                               
+
+                        cross_cor=dataStatistics(matrix_3d, statistic[user_input_statistic - 1], Yref, Zref, DeltaX)
+                        print()
+                        print(f'The {statistic[user_input_statistic-1]} are:\n')
+                        print(cross_cor)
+                        #statistics_calculated=True
+                            
+                            
 
                     elif user_input_statistic == 4:
                         break
@@ -165,7 +211,9 @@ if __name__=='__main__':
                                   '|' + ' '*3 + 'Please do cross-correlation statistic before plotting' + ' '*3 + '|\n'+
                                   '+' + '-'*40 + '+')
                         else:
-                            plot_data=dataPlot(cross_cor, plots[user_input_plot - 1])
+                            correlation_values=dataStatistics(matrix_3d, plots[user_input_plot - 1])
+                            plot_data= dataPlot(correlation_values, plots[user_input_plot - 1])
+                            
                     elif user_input_plot ==4:
                         break
                     else:
