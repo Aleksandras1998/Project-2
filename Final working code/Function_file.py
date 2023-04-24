@@ -117,10 +117,8 @@ def dataPlot (data, statistic):
 # =============================================================================
     if statistic == 'Mean':
         
-        print(data.shape)
-        print(f'Nz={data.shape[1]}')
-        print(f'Ny={data.shape[0]}')
         print('Mean plot has been successfully generated. Continue if needed or enter [4]')
+        
         #Creating x, y coordiantes for the contour plot
         x=np.arange(data.shape[1])
         y=np.arange(data.shape[0])
@@ -132,7 +130,7 @@ def dataPlot (data, statistic):
         fig.colorbar(contour)
         
         #Setting the title and axis labels
-        ax.set_title(f'Contour Plot of Mean array with size {data.shape[1]}x{data.shape[0]}')
+        ax.set_title(f'Contour Plot of Mean array with size {data.shape[0]}x{data.shape[1]}')
         ax.set_xlabel('Wind speed in z direction (Vz (m/s)')
         ax.set_ylabel('Wind speed in y direction (Vy (m/s)')
         
@@ -143,6 +141,8 @@ def dataPlot (data, statistic):
     
     if statistic == 'Variance':
         
+        print('Variance plot has been successfully generated. Continue if needed or enter [4]')
+        
         #Creating x, y coordiantes for the contour plot
         x=np.arange(data.shape[1])
         y=np.arange(data.shape[0])
@@ -154,7 +154,7 @@ def dataPlot (data, statistic):
         fig.colorbar(contour)
         
         #Setting the title and axis labels
-        ax.set_title(f'Contour Plot of Variance array with size {data.shape[1]}x{data.shape[0]}')
+        ax.set_title(f'Contour Plot of Variance array with size {data.shape[0]}x{data.shape[1]}')
         ax.set_xlabel('Wind speed in z direction (Vz (m/s)')
         ax.set_ylabel('Wind speed in y direction (Vy (m/s)')
         
@@ -165,6 +165,8 @@ def dataPlot (data, statistic):
     
     if statistic == 'Cross-Correlation':
         
+        print('Cross-Correlation plot has been successfully generated. Continue if needed or enter [4]')
+        
         #Creating x, y coordiantes for the contour plot
         x=np.arange(data.shape[1])
         y=np.arange(data.shape[0])
@@ -176,7 +178,7 @@ def dataPlot (data, statistic):
         fig.colorbar(contour)
         
         #Setting the title and axis labels
-        ax.set_title(f'Contour Plot of Cross-correlation array with size {data.shape[1]}x{data.shape[0]}')
+        ax.set_title(f'Contour Plot of Cross-correlation array with size {data.shape[0]}x{data.shape[1]}')
         ax.set_xlabel('Wind speed in z direction (Vz (m/s)')
         ax.set_ylabel('Wind speed in y direction (Vy (m/s)')
         

@@ -5,7 +5,7 @@ def dataLoader():
     while True:
         try:
             user_input = input('┏' + '━'*39 + '┓\n'+
-                             '┃'+' '*4+'You are now in Load data menu'+' '*5+'┃\n'+
+                             '┃'+' '*5+'You are now in Load data menu'+' '*5+'┃\n'+
                              '┃Please insert file name and upload file┃\n'+
                              '┃'+' '*2+'Or type "q" to return to main menu'+' '*3+'┃\n'+
                              '┗' + '━'*39 + '┛\n>>')
@@ -32,39 +32,98 @@ def dataLoader():
             
             filename=user_input
             
+#=============================================================================
+#[1] Main input option. User enters dimesions him/herselfe
+#=============================================================================            
+            # while True:
+
+            #     print('┏' + '━'*49 + '┓\n'+
+            #           '┃Enter the dimensions of the 3D array (Nx, Ny, Nz)┃\n'+
+            #           '┃' + ' '*7 +'Or type "q" to return to main menu'+ ' '*8 + '┃\n'+
+            #           '┗' + '━'*49 + '┛\n')
+                
+            #     Nx=input('Nx:').strip()
+            #     if Nx.lower()=='q':
+            #         return None
+            #     elif Nx.isdigit():
+            #         Nx=int(Nx)
+            #     else:
+            #         print('+'+'-'*40+'+\n'+
+            #               '|' + ' '*9 + 'WARNING! Invalid input.' + ' '*8 + '|\n'+
+            #               '|' + ' '*4 + ' Please enter a positive integer' + ' '*4 + '|\n'+
+            #               '|Or type "q" to return to the main menu. |\n'+
+            #               '+' + '-'*40 + '+')
+            #         continue
+                
+            #     Ny=input('Ny: ').strip()
+            #     if Ny.lower() == 'q':
+            #         return None
+            #     elif Ny.isdigit():
+            #         Ny=int(Ny)
+            #     else:
+            #         print('+'+'-'*40+'+\n'+
+            #               '|' + ' '*9 + 'WARNING! Invalid input.' + ' '*8 + '|\n'+
+            #               '|' + ' '*4 + ' Please enter a positive integer' + ' '*4 + '|\n'+
+            #               '|Or type "q" to return to the main menu. |\n'+
+            #               '+' + '-'*40 + '+') 
+            #         continue
+                
+            #     Nz=input('Nz: ').strip()
+            #     if Nz.lower() == 'q':
+            #         return None
+            #     elif Nz.isdigit():
+            #         Nz=int(Nz)
+            #         break
+            #     else:
+            #         print('+'+'-'*40+'+\n'+
+            #               '|' + ' '*9 + 'WARNING! Invalid input.' + ' '*8 + '|\n'+
+            #               '|' + ' '*4 + ' Please enter a positive integer' + ' '*4 + '|\n'+
+            #               '|Or type "q" to return to the main menu. |\n'+
+            #               '+' + '-'*40 + '+')
+            #         continue
+#=============================================================================
+#[2]nd possible option. Creating selection options of Nx x Ny x Nz (This part additional)
+#=============================================================================
+              
+            size=['32 x 32 x 8192','16 x 32 x 16384','8 x 16 x 65536'] # there are plenty of possibilities for input       
             while True:
-                print('┏' + '━'*45 + '┓\n'+
-                      '┃Enter the dimensions of the 3D array (Nx, Ny, Nz)┃\n'+
-                      '┃' + ' '*5 +'Or type "q" to return to main menu'+ ' '*6 + '┃\n'+
-                      '┗' + '━'*45 + '┛\n')
-                
-                Nx=input('Nx:').strip()
-                if Nx.lower()=='q':
-                    return None
-                elif Nx.isdigit():
-                    Nx=int(Nx)
-                else:
-                    print('Invalid input. Please enter a positive integer or type "quit" to return to the main menu.')
-                    continue
-                
-                Ny=input('Ny: ').strip()
-                if Ny.lower() == 'q':
-                    return None
-                elif Ny.isdigit():
-                    Ny=int(Ny)
-                else:
-                    print('Invalid input. Please enter a positive integer or type "quit" to return to the main menu.') 
-                    continue
-                
-                Nz=input('Nz: ').strip()
-                if Nz.lower() == 'q':
-                    return None
-                elif Nz.isdigit():
-                    Nz=int(Nz)
+                user_input_size=int(input('┏' + '━'*68 + '┓\n'+
+                                          '┃Please select which size of 3D array you want to create (Nx x Ny Nz)┃\n'+
+                                          '┗' + '━'*68 + '┛\n'+
+                                          "[1] 32 x 32 x 8192\n" +
+                                          "[2] 16 x 32 x 16384\n" +
+                                          "[3] 8 x 16 x 65536\n"  +
+                                          "[4] 128 x 128 x 512\n"+
+                                          "[5] 256 x 256 x 128\n"+
+                                          "[6] Return to Load Menu\n"+
+                                          ">>"))
+                if user_input_size == 1:
+                    Nx, Ny, Nz=[int(val) for val in size[user_input_size-1].split(' x ')]
                     break
+                    
+                elif user_input_size == 2:
+                    Nx, Ny, Nz=[int(val) for val in size[user_input_size-1].split(' x ')]
+                    break
+                    
+                elif user_input_size == 3:
+                    Nx, Ny, Nz=[int(val) for val in size[user_input_size-1].split(' x ')]
+                    break
+                    
+                elif user_input_size == 4:
+                    Nx, Ny, Nz=[int(val) for val in size[user_input_size-1].split(' x ')]
+                    break
+                    
+                elif user_input_size == 5:
+                    Nx, Ny, Nz=[int(val) for val in size[user_input_size-1].split(' x ')]
+                    break 
+                    
+                elif user_input_size == 6:
+                    return None
+                    break
+                    
                 else:
-                   print('Invalid input. Please enter a positive integer or type "quit" to return to the main menu.')
-                   continue
+                    print("Invalid input. Please select a valid option.")
+                    continue
                
             matrix_3d = dataLoad(filename, Nx, Ny, Nz)
             
