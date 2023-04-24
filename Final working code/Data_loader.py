@@ -12,11 +12,22 @@ def dataLoader():
             if user_input.lower()=='q':
                 return None
             elif not user_input.endswith('.bin'):
-                print('+'+'-'*34+'+\n'+
-                      f'| {" " * 0}{user_input} needs to have .bin extension{" " * 0} |\n'+
-                      f'| {" " * 2}Error loading data from {user_input}{" " * 3} |\n'+
-                      '|' + ' '*9 + 'Please try again' + ' '*9 + '|\n'+
-                      '+'+'-'*34+'+')
+                
+                # Calculating the length of the user_input string
+                input_length = len(user_input)
+                
+                # Calculating the number of dashes needed for the top and bottom borders
+                num_dashes = input_length + 26
+                
+                # Constructing the message with adjusted borders
+                message=('+' + '-' * (num_dashes+7) + '+\n'
+                        f'| {" " * ((num_dashes - input_length - 24) // 2)}{user_input} needs to have .bin extension{" " * ((num_dashes - input_length - 24) // 2)} |\n'+
+                        f'| {" " * ((num_dashes - input_length - 24) // 2 + 2)}Error loading data from {user_input}{" " * ((num_dashes - input_length - 24) // 2 + 3)} |\n'+
+                        f'| {" " * ((num_dashes - input_length - 24) // 2 + 9)}Please try again☺{" " * ((num_dashes - input_length - 24) // 2 + 9)}|\n'+
+                        '+' + '-' * (num_dashes+7) + '+')
+                
+                #Printing the message
+                print(message)
                 return None
             
             filename=user_input
@@ -65,6 +76,20 @@ def dataLoader():
                 continue
             
         except:
-            print(f'Error loading data from {filename}. Please try again')
+            
+            # Calculating the length of the filename string
+            filename_length = len(filename)
+            
+            # Calculating the number of dashes needed for the top and bottom borders
+            num_dashes = filename_length + 28
+            
+            # Constructing the message with adjusted borders
+            message = ('+' + '-' * num_dashes + '+\n'
+                       f'| {" " * ((num_dashes - filename_length - 26) // 2)}Error loading data from {filename}.{" " * ((num_dashes - filename_length - 27) // 2)} |\n'+
+                       f'| {" " * ((num_dashes - filename_length - 26) // 2 + 8)}Please try again{" " * ((num_dashes - filename_length - 27) // 2 + 7)} |\n'+
+                       '+' + '-' * num_dashes + '+')
+            
+            #Printing the message
+            print(message)
         
     return matrix_3d
